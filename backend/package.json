@@ -1,0 +1,31 @@
+{
+  "name": "booking-care-backend",
+  "version": "1.0.0",
+  "description": "the first server build by nodejs of mine",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "sequelize",
+    "expressjs",
+    "ejs",
+    "mysql"
+  ],
+  "author": "gnutyud",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.16.2"
+  }
+}
