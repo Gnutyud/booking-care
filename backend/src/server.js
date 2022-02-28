@@ -2,11 +2,10 @@ const express = require('express');
 require('dotenv').config();
 const viewEngine = require('./config/viewEngine');
 const bodyParser = require('body-parser');
-const db = require('./models');
 
 const app = express();
 
-const homeRoutes = require('./routes/home');
+const homeRoutes = require('./routes/api');
 
 // config middleware for app
 viewEngine(app);
