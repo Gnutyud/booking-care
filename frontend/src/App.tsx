@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Login from './features/counter/auth/Login';
 import CounterPage from './features/counter/CounterPage';
 
