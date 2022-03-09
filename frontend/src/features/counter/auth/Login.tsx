@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import appApi from '../../../services/appApi';
 import style from './Login.module.scss';
 
@@ -21,13 +22,17 @@ const Login = () => {
   const [formErrors, setFormErrors] = useState<FormErrors>(initialErrors);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   const submitForm = async () => {
     console.log('send request');
     try {
       let res = await appApi.login(formValues);
       setFormErrors({ ...formErrors, success: 'Signed in successfully' });
-      console.log(res);
+      // console.log(res);
       // store user info and go to the next page
+      localStorage.setItem('token', res.user.token);
+      navigate('/');
     } catch (err: any) {
       if (err.message) {
         setFormErrors({ ...formErrors, error: err.message });
@@ -41,7 +46,6 @@ const Login = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setFormValues({ ...formValues, [name]: value });
     setFormErrors({ ...formErrors, [name]: '', error: '' });
   };
