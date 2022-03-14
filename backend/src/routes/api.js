@@ -10,5 +10,6 @@ router.get("/", homeController.getHome);
 router.post("/api/users/register", userController.createUser);
 router.post("/api/users/login", userController.loginUser);
 router.patch("/api/user", authByToken, userController.updateUserDetails);
+router.post("/api/user/refreshToken", userController.refreshToken);
 
 module.exports = router;

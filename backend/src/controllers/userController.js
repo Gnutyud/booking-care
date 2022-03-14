@@ -1,6 +1,9 @@
 const db = require('../models');
+require('dotenv').config();
 const { hashPassword, matchPassword } = require('../utils/password');
-const { sign } = require('../utils/jwt');
+const { createToken, verifyJwtToken } = require('../utils/jwt');
+
+const tokenList = {};
 
 module.exports.createUser = async (req, res) => {
   try {
@@ -23,11 +26,11 @@ module.exports.createUser = async (req, res) => {
       lastName: req.body.lastName,
       password: password,
       email: req.body.email
-    })
+    });
 
     if (user) {
       if (user.dataValues.password) delete user.dataValues.password;
-      user.dataValues.token = await sign(user)
+      user.dataValues.token = await createToken(user, process.env.JWT_SECRET_TOKEN, process.env.TOKEN_LIFE)
       res.status(201).json({ user })
     }
   } catch (e) {
@@ -37,7 +40,6 @@ module.exports.createUser = async (req, res) => {
 
 module.exports.loginUser = async (req, res) => {
   try {
-    console.log('body', req.body)
     if (!req.body.email) throw new Error('Email is Required')
     if (!req.body.password) throw new Error('Password is Required')
 
@@ -46,7 +48,6 @@ module.exports.loginUser = async (req, res) => {
         email: req.body.email
       }
     })
-    console.log("user", user)
 
     if (!user) {
       res.status(401)
@@ -61,9 +62,16 @@ module.exports.loginUser = async (req, res) => {
       throw new Error('Incorrect password. Please try again.')
     }
 
-    delete user.dataValues.password
-    user.dataValues.token = await sign({ email: user.dataValues.email, username: user.dataValues.username })
+    const token = await createToken({ email: user.dataValues.email }, process.env.JWT_SECRET_TOKEN, process.env.TOKEN_LIFE);
+    const refreshToken = await createToken({ email: user.dataValues.email }, process.env.JWT_SECRET_REFRESH_TOKEN, process.env.REFRESH_TOKEN_LIFE);
 
+    delete user.dataValues.password
+    user.dataValues.token = token;
+    user.dataValues.refreshToken = refreshToken;
+
+    tokenList[refreshToken] = {
+      email: user.dataValues.email
+    };
     res.status(200).json({ user })
   } catch (e) {
     const status = res.statusCode ? res.statusCode : 500
@@ -71,9 +79,40 @@ module.exports.loginUser = async (req, res) => {
   }
 }
 
+module.exports.refreshToken = async (req, res) => {
+  // refresh the damn token
+  const { refreshToken } = req.body
+  // if refresh token exists
+  console.log(refreshToken)
+  console.log(tokenList)
+  if ((refreshToken) && (refreshToken in tokenList)) {
+    try {
+      await verifyJwtToken(refreshToken, process.env.JWT_SECRET_REFRESH_TOKEN);
+
+      const user = tokenList[refreshToken];
+      const token = await createToken(user, process.env.JWT_SECRET_TOKEN, process.env.TOKEN_LIFE);
+      const response = {
+        "token": token,
+      };
+      res.status(200).json(response);
+    } catch (err) {
+      console.error(err);
+      res.status(403).json({
+        message: 'Invalid refresh token',
+      });
+    }
+  } else {
+    res.status(400).send('Invalid request')
+  }
+};
+
 module.exports.updateUserDetails = async (req, res) => {
   try {
-    const user = await db.User.findByPk(req.user.email)
+    const user = await db.User.findOne({
+      where: {
+        email: req.user.email
+      }
+    })
 
     if (!user) {
       res.status(401)
@@ -107,5 +146,4 @@ module.exports.updateUserDetails = async (req, res) => {
       errors: { body: [e.message] }
     })
   }
-
 }

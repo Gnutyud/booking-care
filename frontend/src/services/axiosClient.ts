@@ -9,11 +9,9 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
   function (config: AxiosRequestConfig) {
-    // let Storage: any = localStorage.getItem('user');
-    // let store = JSON.parse(Storage);
-    // if (store) {
-    //   config.headers.Authorization = 'Bearer ' + store.token;
-    // }
+    if(!config.headers) config.headers =  {};
+    const token = localStorage.getItem('token');
+    config.headers.Authorization =  token ? `Bearer ${token}` : '';
     return config;
   },
   function (error: AxiosError) {
@@ -26,7 +24,7 @@ axiosClient.interceptors.response.use(
     return response.data;
   },
   function (error: AxiosError) {
-    if(error.response?.status === 401) {
+    if(error.response?.status === 401 || error.response?.status === 422) {
       return Promise.reject(error.response.data)
     }
     return Promise.reject(error);

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import appApi from '../../../services/appApi';
+import Button from '../../components/UI/Button';
+import appApi from '../../services/appApi';
 import style from './Login.module.scss';
+import JWTManager from '../../helper/jwt'
 
 interface FormValues {
   email: string;
@@ -29,9 +31,9 @@ const Login = () => {
     try {
       let res = await appApi.login(formValues);
       setFormErrors({ ...formErrors, success: 'Signed in successfully' });
-      // console.log(res);
       // store user info and go to the next page
-      localStorage.setItem('token', res.user.token);
+      localStorage.setItem('refreshToken', res.user.refreshToken);
+      JWTManager.setToken(res.user.token);
       navigate('/');
     } catch (err: any) {
       if (err.message) {
@@ -128,7 +130,7 @@ const Login = () => {
             </div>
             <a href={url}>Forgot password?</a>
           </div>
-          <button type="submit">Login</button>
+          <Button type="submit" name="Login" />
         </form>
       </div>
     </>

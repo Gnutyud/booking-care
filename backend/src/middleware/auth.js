@@ -1,10 +1,10 @@
-const { decode } = require('../utils/jwt');
+require('dotenv').config();
+const { verifyJwtToken } = require('../utils/jwt');
 
 module.exports.authByToken = async (req, res, next) => {
 
-  //Check for Authorization header
+  //Check for Authorization header (authHeader here is: "Bearer accessToken" or "null")
   const authHeader = req.header('Authorization') ? req.header('Authorization').split(' ') : null
-
   if (!authHeader) {
     return res.status(422).json({
       errors: { body: ['Authorization failed', 'No Authorization header'] }
@@ -12,7 +12,7 @@ module.exports.authByToken = async (req, res, next) => {
   }
 
   //Check if authorization type is token
-  if (authHeader[0] !== 'Token')
+  if (authHeader[0] !== 'Bearer')
     return res.status(401).json({
       errors: { body: ['Authorization failed', 'Token missing'] }
     })
@@ -20,9 +20,9 @@ module.exports.authByToken = async (req, res, next) => {
   //Check if token is valid
   const token = authHeader[1];
   try {
-    const user = await decode(token)
+    const user = await verifyJwtToken(token, process.env.JWT_SECRET_TOKEN);
     if (!user) throw new Error('No user found in token');
-    req.user = user
+    req.user = user;
     return next()
   } catch (e) {
     return res.status(401).json({

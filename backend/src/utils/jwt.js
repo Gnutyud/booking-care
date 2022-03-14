@@ -1,28 +1,38 @@
 const jwt = require('jsonwebtoken');
 
-module.exports.sign = async (user) => {
-  const JWT_SECRET = 'qemsaslvjd-33r3:9i9vis3.'
+module.exports.createToken = async (user, jwtSecret, tokenLife) => {
   return new Promise((resolve, reject) => {
     jwt.sign({
-      username: user.username,
       email: user.email
-    }, JWT_SECRET, (err, token) => {
-      if (err)
-        return reject(err)
+    }, jwtSecret, {
+      expiresIn: tokenLife
+    }, (err, token) => {
+      if (err) return reject(err);
       return resolve(token)
     })
   })
-
 }
 
-module.exports.decode = async (token) => {
-  const JWT_SECRET = 'qemsaslvjd-33r3:9i9vis3.'
+module.exports.verifyJwtToken = (token, secretKey) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
-      if (err)
-        return reject(err)
+    jwt.verify(token, secretKey, (err, decoded) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(decoded);
+    });
+  });
+};
 
-      return resolve(decoded)
-    })
-  })
+module.exports.sendRefreshToken = (res, user) => {
+  res.cookie(
+    process.env.REFRESH_TOKEN_COOKIE_NAME,
+    createToken('refreshToken', user),
+    {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      path: '/refreshToken'
+    }
+  )
 }

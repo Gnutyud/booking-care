@@ -1,0 +1,33 @@
+.container {
+  background-color: #e5e5e5;
+  height: 100vh;
+  .register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    background-color: #e5e5e5;
+    padding: 10px;
+    h1 {
+      // font-family: Lexend Deca;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 64px;
+      line-height: 80px;
+      text-align: center;
+      color: #224957;
+      margin-bottom: 40px;
+    }
+    .inputGroup {
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: 30px;
+      margin-bottom: 5px;
+    }
+    .button {
+      width: 400px;
+      margin: 10px auto 0 auto;
+    }
+  }
+}
