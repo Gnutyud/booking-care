@@ -18,6 +18,9 @@ const appApi = {
   refreshToken: (data: { refreshToken: string }): Promise<any> => {
     return axiosClient.post('user/refreshToken', data);
   },
+  getAllUsers: (): Promise<UserInfo> => {
+    return axiosClient.get('users')
+  }
 };
 
 export default appApi;

@@ -146,4 +146,24 @@ module.exports.updateUserDetails = async (req, res) => {
       errors: { body: [e.message] }
     })
   }
+};
+
+module.exports.getAllUsers = async (req, res, next) => {
+  try {
+    const { limit = 20, offset = 0 } = req.query;
+    const users = await db.User.findAll({
+      attributes: ['id', 'firstName', 'lastName', 'phoneNumber', 'address', 'email', 'gender', 'roleId', 'positionId'],
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    }
+    );
+    if (!users) {
+      res.status(401);
+      throw new Error('No user found');
+    };
+    res.json(users);
+  } catch (err) {
+    const status = res.statusCode ? res.statusCode : 422
+    res.status(status).json({ errors: { message: e.message } })
+  }
 }

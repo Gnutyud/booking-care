@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { PrivateRoute } from './components/common/PrivateRoute';
 import Layout from './components/Layout/Layout';
+import ManageUser from './features/admin/ManageUser';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import CounterPage from './features/counter/CounterPage';
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<ManageUser />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<h1>Home Page</h1>} />
           <Route
