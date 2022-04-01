@@ -6,8 +6,7 @@ const Layout = () => {
     <div>
       <h1>Header</h1>
       <nav>
-      <Link to=".">Home</Link> | <Link to="login">Login</Link> | <Link to="register">Register</Link> |{' '}
-        <Link to="admin">Admin</Link> | <Link to="counter">Counter</Link>
+      <Link to=".">Home</Link> | <Link to="admin">Admin</Link> | <Link to="counter">Counter</Link>
       </nav>
       <Outlet />
     </div>

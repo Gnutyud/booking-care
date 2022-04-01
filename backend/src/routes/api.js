@@ -12,5 +12,6 @@ router.post("/api/users/login", userController.loginUser);
 router.patch("/api/user", authByToken, userController.updateUserDetails);
 router.post("/api/user/refreshToken", userController.refreshToken);
 router.get("/api/users", userController.getAllUsers);
+router.delete("/api/user/:id", userController.deleteUser);
 
 module.exports = router;

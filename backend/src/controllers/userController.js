@@ -166,4 +166,27 @@ module.exports.getAllUsers = async (req, res, next) => {
     const status = res.statusCode ? res.statusCode : 422
     res.status(status).json({ errors: { message: e.message } })
   }
+};
+module.exports.deleteUser = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+  if(!userId) {
+    res.status(401);
+    throw new Error('Missing user id');
+  };
+  const user = await db.User.findByPk(userId);
+  if(!user) {
+    res.status(401);
+    throw new Error('No user found!')
+  };
+  await db.User.destroy({
+    where: { id : userId}
+  });
+  res.status(200).json({ message: 'User deleted successfully'})
+  } catch (error) {
+    const code = res.statusCode ? res.statusCode : 422;
+		return res.status(code).json({
+			errors: { body: ['Could not delete user', error.message] },
+		});
+  }
 }

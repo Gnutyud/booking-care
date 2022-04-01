@@ -12,8 +12,16 @@ function App() {
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<ManageUser />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <ManageUser />
+            </PrivateRoute>
+          }
+        />
+        <Route path="admin/register" element={<Register />} />
+        <Route path="admin/edit/:userId" element={<Register />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<h1>Home Page</h1>} />
           <Route

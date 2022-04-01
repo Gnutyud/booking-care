@@ -40,15 +40,15 @@ const initialValues = {
 // And now we can use these
 const Register = () => {
   const navigate = useNavigate();
-  const handleSubmit = async (values: any, setErros: (err: any) => void) => {
+  const handleSubmit = async (values: any, setErrors: (err: any) => void) => {
     try {
       const res = await appApi.register(values);
       console.log("hello", res.user.email)
-      navigate('/login');
+      navigate('/admin');
     } catch (err: any) {
       if (err.errors.message) {
         console.log(err.errors.message);
-        setErros({
+        setErrors({
           email: err.errors.message,
         });
       }

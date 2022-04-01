@@ -9,8 +9,9 @@ interface TableProps {
 }
 
 const Table = (props: TableProps) => {
-  const columnsMemo = useMemo(() => props.columns, []);
-  const dataMemo = useMemo(() => props.data, []);
+  const columnsMemo = useMemo(() => props.columns, [props.columns]);
+  const dataMemo = useMemo(() => props.data, [props.data]);
+  console.log(dataMemo);
   const tableInstance = useTable(
     {
       columns: columnsMemo,

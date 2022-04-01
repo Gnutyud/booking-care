@@ -20,6 +20,9 @@ const appApi = {
   },
   getAllUsers: (): Promise<UserInfo> => {
     return axiosClient.get('users')
+  },
+  deleteUser: (id: number) => {
+    return axiosClient.delete(`user/${id}`)
   }
 };
 
