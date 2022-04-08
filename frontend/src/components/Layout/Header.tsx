@@ -3,56 +3,60 @@ import { AiFillQuestionCircle, AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/icons/bookingcare-2020.svg';
 import styles from './Header.module.scss';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { language } from '../../features/home/homeSlice';
+import { languageData } from '../../features/home/homeSlice';
+import { setLang } from '../../features/home/homeSlice';
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const currentLanguage = useAppSelector(language);
+  const currentLanguageData = useAppSelector(languageData);
   return (
     <div className={styles.header}>
       <div className={styles.menuLogo}>
         <div className={styles.menu}>
           <AiOutlineMenu size={25} color={'#969495'} />
         </div>
-        <div className={styles.logo}>
-          <img src={logo} alt="logo" width={160} height={40} />
-        </div>
+        <Link to=".">
+          <div className={styles.logo}>
+            <img src={logo} alt="logo" width={160} height={40} />
+          </div>
+        </Link>
       </div>
       <div className={styles.menuItems}>
         <nav>
           <ul>
-            <li>
-              <Link to=".">
-                <h5>Chuyên khoa</h5>
-                <p>Tìm bác sĩ theo chuyên khoa</p>
-              </Link>
-            </li>
-            <li>
-              <Link to="admin">
-                <h5>Cơ sở y tế</h5>
-                <p>Chọn bệnh viện phòng khám</p>
-              </Link>
-            </li>
-            <li>
-              <Link to="counter">
-                <h5>Bác sĩ</h5>
-                <p>Chọn bác sĩ giỏi</p>
-              </Link>
-            </li>
-            <li>
-              <Link to="counter">
-                <h5>Gói khám</h5>
-                <p>Khám sức khỏe tổng quát</p>
-              </Link>
-            </li>
+            {currentLanguageData.header.HeadersLink.map((link) => (
+              <li key={link.link}>
+                <Link to={link.link}>
+                  <h5>{link.title}</h5>
+                  <p>{link.desc}</p>
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
       <div className={styles.help}>
-        <Link to="admin">
+        <Link to={currentLanguageData.header.support.link}>
           <AiFillQuestionCircle color="#45c3d2" size={18} />
-          Hỗ trợ
+          {currentLanguageData.header.support.name}
         </Link>
         <div className={styles.switchLang}>
-          <button>EN</button>{' | '}
-          <button className={styles.activeLang}>VI</button>
+          <button
+            className={currentLanguage === 'en' ? styles.activeLang : ''}
+            onClick={() => dispatch({ type: setLang.type, payload: 'en' })}
+          >
+            EN
+          </button>
+          {' | '}
+          <button
+            className={currentLanguage === 'vi' ? styles.activeLang : ''}
+            onClick={() => dispatch({ type: setLang.type, payload: 'vi' })}
+          >
+            VI
+          </button>
         </div>
       </div>
     </div>

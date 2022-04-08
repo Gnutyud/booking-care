@@ -2,8 +2,15 @@ import React from 'react'
 import styles from './HomeHeaderSection.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 import HeaderOptionsList from './HeaderOptionsList';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { language } from '../homeSlice';
+import { languageData } from '../homeSlice';
 
 const HomeHeaderSection = () => {
+  const dispatch = useAppDispatch();
+  const currentLanguage = useAppSelector(language);
+  const currentLanguageData = useAppSelector(languageData);
+  
   return (
     <div className={styles.homeHeader}>
         <div className={styles.homeHeaderSearch}>
