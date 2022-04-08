@@ -1,3 +1,4 @@
+import HomePage from 'features/home/HomePage';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { PrivateRoute } from './components/common/PrivateRoute';
@@ -23,7 +24,7 @@ function App() {
         <Route path="admin/register" element={<Register />} />
         <Route path="admin/edit/:userId" element={<Register />} />
         <Route path="/" element={<Layout />}>
-          <Route index element={<h1>Home Page</h1>} />
+          <Route index element={<HomePage/>} />
           <Route
             path="/counter"
             element={

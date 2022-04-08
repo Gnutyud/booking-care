@@ -1,0 +1,78 @@
+.homeHeader {
+  background-image: url('../../../assets//images/header-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  // height: 605px;
+  .homeHeaderSearch {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1));
+    .searchContent {
+      text-align: center;
+      padding: 65px 15px;
+      margin: 0 175px;
+
+      h1 {
+        margin-bottom: 20px;
+        line-height: 45px;
+        font-size: 32px;
+        color: #ffffff;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 1px #333;
+        font-weight: normal;
+        span {
+          display: block;
+          font-weight: bold;
+        }
+      }
+
+      .searchInput {
+        position: relative;
+        width: 456px;
+        margin: 0 auto;
+
+        input {
+          height: 50px;
+          width: 100%;
+          background: #f7d800;
+          color: black;
+          font-size: 14px;
+          outline: none;
+          border-radius: 25px;
+          border: 1px solid transparent;
+          line-height: 50px;
+          padding-left: 50px;
+          padding-right: 25px;
+        }
+
+        .searchIcon {
+          position: absolute;
+          top: 15px;
+          left: 15px;
+        }
+      }
+
+      .downloadApp {
+        margin-top: 100px;
+        .chPlay, .appStore {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          width: 120px;
+          height: 40px;
+          outline: none;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
+        .appStore {
+          background-image: url('../../../assets/icons/app-store-badge-black-vn.svg');
+        }
+        .chPlay {
+          background-image: url('../../../assets/icons/google-play-badge-vn.svg');
+          border-radius: 8px;
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+}

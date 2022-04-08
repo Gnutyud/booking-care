@@ -1,0 +1,46 @@
+.optionItem {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    p {
+      color: #45c3d2;
+    }
+  }
+
+  .imgBox {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.5);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+  
+  p {
+    min-width: 150px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    color: #333;
+    text-transform: capitalize;
+  }
+}
+
+.optionList {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 1));
+  padding-top: 50px;
+  padding-bottom: 20px;
+  gap: 10px;
+}

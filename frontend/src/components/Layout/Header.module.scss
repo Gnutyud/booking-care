@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px;
+  margin: 0 175px;
+  .menuLogo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .menu {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .menuItems nav ul {
+    display: flex;
+    gap: 25px;
+    &:li {
+      text-align: left;
+    }
+  }
+
+  .menuItems nav ul li a {
+    color: #333333;
+    h5 {
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    p {
+      font-weight: lighter;
+      font-size: 10px;
+    }
+  }
+
+  .help {
+    display: flex;
+    justify-content: center;
+    color: #969495;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: inherit;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    button {
+      outline: none;
+      border: none;
+      background-color: transparent;
+      color: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .activeLang {
+      color: #45c3d2;
+    }
+  }
+}
