@@ -7,6 +7,7 @@ const vi = {
       { title: 'Gói khám', desc: 'Khám sức khỏe tổng quát', link: 'goikham' },
     ],
     support: { name: 'Hỗ trợ', link: 'support' },
+    title: { line1: 'Nền Tảng Y Tế', line2: 'Chăm Sóc Sức Khỏe Toàn Diện' },
   },
 };
 

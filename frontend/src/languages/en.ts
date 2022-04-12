@@ -7,6 +7,7 @@ const en = {
       { title: 'Examination package', desc: 'General health check', link: 'goikham' },
     ],
     support: { name: 'Support', link: 'support' },
+    title: { line1: 'Background In Medicine', line2: 'Health Treatment That Is Complete' },
   },
 };
 
