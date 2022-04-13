@@ -1,36 +1,65 @@
 import React from 'react';
-import covidTest from '../../../../assets/images/140801-test-covid.jpg';
-import spo2Machine from '../../../../assets/images/163937-microlife-spo2-1.png';
-import kitTestCovid from '../../../../assets/images/170022-kit-test-nhanh.png';
-import treatAtHome from '../../../../assets/images/dieu-tri-tai-nha.jpg';
+import taiMuiHong from '../../../../assets/images/specialties/095722tai-mui-hong.jpg';
+import coXuongKhop from '../../../../assets/images/specialties/120331-co-xuong-khop.jpg';
+import timMach from '../../../../assets/images/specialties/120741-tim-mach.jpg';
+import thanKinh from '../../../../assets/images/specialties/121042-than-kinh.jpg';
+import cotSong from '../../../../assets/images/specialties/121215-cot-song.jpg';
+import chamCuu from '../../../../assets/images/specialties/121305-cham-cuu.jpg';
+import yHocCoTruyen from '../../../../assets/images/specialties/121232-y-hoc-co-truyen.jpg';
+import tieuHoa from '../../../../assets/images/specialties/120933-tieu-hoa.jpg';
 import PopularSection from '../PopularSection';
 
 const SPECIALTY_LIST = [
   {
-    image: treatAtHome,
-    title: 'Tư vấn F0 điều trị tại nhà',
+    image: tieuHoa,
+    title: 'Tiêu hóa',
     link: '',
   },
   {
-    image: covidTest,
-    title: 'Kit Test COVID bằng nước bọt',
+    image: taiMuiHong,
+    title: 'Tai mũi họng',
     link: '',
   },
   {
-    image: spo2Machine,
-    title: 'Máy Đo Nồng Độ Oxy Trong Máu',
+    image: coXuongKhop,
+    title: 'Cơ xương khớp',
     link: '',
   },
   {
-    image: kitTestCovid,
-    title: 'Xét nghiệm COVID',
+    image: timMach,
+    title: 'Tim mạch',
+    link: '',
+  },
+  {
+    image: thanKinh,
+    title: 'Thần kinh',
+    link: '',
+  },
+  {
+    image: cotSong,
+    title: 'Cột sống',
+    link: '',
+  },
+  {
+    image: chamCuu,
+    title: 'Châm cứu',
+    link: '',
+  },
+  {
+    image: yHocCoTruyen,
+    title: 'Y học cổ truyền',
     link: '',
   },
 ];
 
 const Specialty = () => {
   return (
-    <PopularSection data={SPECIALTY_LIST} backgroundColor="#f5f5f5" title="Chuyên khoa phổ biến" />
+    <PopularSection
+      data={SPECIALTY_LIST}
+      backgroundColor="#f5f5f5"
+      title="Chuyên khoa phổ biến"
+      button={{ name: 'xem thêm', to: '#chuyenkhoa' }}
+    />
   );
 };
 

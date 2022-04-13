@@ -2,8 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 15px;
-  margin: 0 175px;
+  padding: 15px 190px;
+  // sticky header
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
   .menuLogo {
     display: flex;
     justify-content: flex-start;

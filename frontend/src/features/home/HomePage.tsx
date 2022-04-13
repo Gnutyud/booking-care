@@ -5,6 +5,7 @@ import ProminentSection from './ProminentSection/ProminentSection';
 import Specialty from './PopularSection/Specialty/Specialty';
 import HealthFacilities from './PopularSection/HealthFacilities/HealthFacilities';
 import Doctor from './PopularSection/Doctor.tsx/Doctor';
+import HandBook from './PopularSection/Handbook/Handbook';
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Specialty />
       <HealthFacilities />
       <Doctor />
+      <HandBook />
     </div>
   );
 };

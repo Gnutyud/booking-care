@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom';
 import styles from './PopularSection.module.scss';
 
@@ -8,27 +7,33 @@ interface PopularProps {
   data: {
     image: string;
     title: string;
-    link: string
+    link: string;
   }[];
   backgroundColor: string;
   title: string;
   customPopularItemStyles?: {
-    image: {};
-    title: {};
-    container: {};
+    image?: {};
+    title?: {};
+    container?: {};
+    containerA?: {};
   };
+  button: {
+    name: string;
+    to: string;
+  };
+  responsive?: {};
 }
 
-const responsive = {
+const defaultResponsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 4,
-    slidesToSlide: 1, // optional, default to 1.
+    slidesToSlide: 4, // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 1, // optional, default to 1.
+    slidesToSlide: 2, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -37,19 +42,45 @@ const responsive = {
   },
 };
 
-export const PopularSection = ({data , backgroundColor, title, customPopularItemStyles}: PopularProps) => {
+export const PopularSection = ({
+  data,
+  backgroundColor,
+  title,
+  customPopularItemStyles,
+  button,
+  responsive,
+}: PopularProps) => {
   return (
-    <div className={styles.popular} style={{backgroundColor: backgroundColor}}>
+    <div className={styles.popular} style={{ backgroundColor: backgroundColor }}>
       <div className={styles.header}>
         <h2>{title}</h2>
-        <button>Xem Thêm</button>
+        <Link to={button.to}>{button.name}</Link>
       </div>
-      <Carousel responsive={responsive} sliderClass={styles.slider} arrows={true} autoPlay={false}>
-        {data.map((popular: any) => (
-          <div className={styles.popularItem} style={customPopularItemStyles ? customPopularItemStyles.container : undefined}>
-            <Link to={popular.link}>
-              <img src={popular.image} alt={popular.title} style={customPopularItemStyles ? customPopularItemStyles.image : undefined}/>
-              <h3 style={customPopularItemStyles ? customPopularItemStyles.title : undefined}>{popular.title}</h3>
+      <Carousel
+        responsive={responsive || defaultResponsive}
+        sliderClass={styles.customSlider}
+        itemClass={styles.customItem}
+        arrows={true}
+        autoPlay={false}
+        shouldResetAutoplay={true}
+      >
+        {data.map((popular) => (
+          <div
+            className={styles.popularItem}
+            style={customPopularItemStyles ? customPopularItemStyles.container : undefined}
+          >
+            <Link
+              to={popular.link}
+              style={customPopularItemStyles ? customPopularItemStyles.containerA : undefined}
+            >
+              <img
+                src={popular.image}
+                alt={popular.title}
+                style={customPopularItemStyles ? customPopularItemStyles.image : undefined}
+              />
+              <h3 style={customPopularItemStyles ? customPopularItemStyles.title : undefined}>
+                {popular.title}
+              </h3>
             </Link>
           </div>
         ))}

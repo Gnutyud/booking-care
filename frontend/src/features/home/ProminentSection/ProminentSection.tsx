@@ -1,10 +1,10 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import covidTest from '../../../assets/images/140801-test-covid.jpg';
-import spo2Machine from '../../../assets/images/163937-microlife-spo2-1.png';
-import kitTestCovid from '../../../assets/images/170022-kit-test-nhanh.png';
-import treatAtHome from '../../../assets/images/dieu-tri-tai-nha.jpg';
+import covidTest from '../../../assets/images/prominents/140801-test-covid.jpg';
+import spo2Machine from '../../../assets/images/prominents/163937-microlife-spo2-1.png';
+import kitTestCovid from '../../../assets/images/prominents/170022-kit-test-nhanh.png';
+import treatAtHome from '../../../assets/images/prominents/dieu-tri-tai-nha.jpg';
 import { ProminentItem } from './ProminentItem';
 import styles from './ProminentSection.module.scss';
 
